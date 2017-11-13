@@ -18,6 +18,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/tan_background"
+    android:orientation="vertical"
     tools:context="com.example.android.miwok.MainActivity">
 
     <TextView
