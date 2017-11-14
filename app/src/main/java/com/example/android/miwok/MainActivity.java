@@ -15,13 +15,13 @@
  */
 package com.example.android.miwok;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +30,21 @@ public class MainActivity extends AppCompatActivity {
         // Set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_main);
 
+        View colors = findViewById(R.id.colors);
+        View family = findViewById(R.id.family);
+        View numbers = findViewById(R.id.numbers);
+        View phrases = findViewById(R.id.phrases);
+
+        colors.setOnClickListener(this);
+        family.setOnClickListener(this);
+        numbers.setOnClickListener(this);
+        phrases.setOnClickListener(this);
+
     }
 
-    public void buttonClick(View view) {
+//    callback method for onClick events
+    @Override
+    public void onClick(View view) {
         switch (view.getId()) {
             case R.id.colors:
                 moveToActivity(ColorsActivity.class);
