@@ -14,10 +14,15 @@
         android:src="@mipmap/ic_launcher"
         />
 
+    <RelativeLayout
+        tools:background="@color/category_numbers"
+        android:id="@+id/text_container"
+        style="@style/TextContainer" >
+
         <LinearLayout
-            tools:background="@color/category_numbers"
-            android:id="@+id/text_container"
-            style="@style/TextContainer"
+            android:layout_alignParentLeft="true"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
             android:orientation="vertical" >
 
             <TextView
@@ -34,5 +39,16 @@
                 android:id="@+id/default_trans"
                 style="@style/TextEntry"
                 />
+
         </LinearLayout>
+
+        <ImageView
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/ic_play_arrow"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+    </RelativeLayout>
 </LinearLayout>

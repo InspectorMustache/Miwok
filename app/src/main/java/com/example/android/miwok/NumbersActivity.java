@@ -1,5 +1,7 @@
 package com.example.android.miwok;
 
+import android.content.Context;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +15,8 @@ public class NumbersActivity extends AppCompatActivity {
     private AdapterView.OnItemClickListener adapterViewClickListener;
     private MediaPlayer mPlayer;
     private MediaPlayer.OnCompletionListener mPlayerCompletionListener;
+    private AudioManager audioManager;
+    private AudioManager.OnAudioFocusChangeListener audioFocusListener;
 
     @Override
     protected void onStop() {
@@ -49,9 +53,33 @@ public class NumbersActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 releaseMediaPlayer();
-                mPlayer = MediaPlayer.create(parent.getContext(), words.get(position).getPronuciationId());
-                mPlayer.start();
-                mPlayer.setOnCompletionListener(mPlayerCompletionListener);
+                int result = audioManager.requestAudioFocus(audioFocusListener,
+                        AudioManager.STREAM_MUSIC,
+                        AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+                if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+                    mPlayer = MediaPlayer.create(parent.getContext(), words.get(position).getPronuciationId());
+                    mPlayer.start();
+                    mPlayer.setOnCompletionListener(mPlayerCompletionListener);
+                }
+            }
+        };
+
+        audioManager = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
+
+        audioFocusListener = new AudioManager.OnAudioFocusChangeListener() {
+            @Override
+            public void onAudioFocusChange(int focusChange) {
+                switch (focusChange) {
+                    case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
+                        releaseMediaPlayer();
+                        break;
+                    case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
+                        releaseMediaPlayer();
+                        break;
+                    case AudioManager.AUDIOFOCUS_LOSS:
+                        releaseMediaPlayer();
+                        break;
+                }
             }
         };
 
@@ -65,6 +93,7 @@ public class NumbersActivity extends AppCompatActivity {
         if (this.mPlayer != null) {
             this.mPlayer.release();
             this.mPlayer = null;
+            audioManager.abandonAudioFocus(audioFocusListener);
         }
     }
 }

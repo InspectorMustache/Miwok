@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class WordAdapter extends ArrayAdapter<Word> {
             );
         }
 
-        LinearLayout textContainer = (LinearLayout) convertView.findViewById(R.id.text_container);
+        RelativeLayout textContainer = (RelativeLayout) convertView.findViewById(R.id.text_container);
         textContainer.setBackgroundColor(ContextCompat.getColor(getContext(), this.bgColor));
 
         final Word currentWord = this.getItem(position);
