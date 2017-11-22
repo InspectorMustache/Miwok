@@ -39,6 +39,7 @@ public class PhrasesFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_dictionary, container, false);
 
+
         final ArrayList<Word> words = new ArrayList<Word>();
         words.add(new Word("Where are you going?", "minto wuksus", R.raw.phrase_where_are_you_going));
         words.add(new Word("What is your name?", "tinnә oyaase'nә", R.raw.phrase_what_is_your_name));
@@ -96,7 +97,7 @@ public class PhrasesFragment extends Fragment {
         };
 
         ListView wordListView = (ListView) rootView.findViewById(R.id.list);
-        WordAdapter wordAdapter = new WordAdapter(getActivity(), words, R.color.category_colors);
+        WordAdapter wordAdapter = new WordAdapter(getActivity(), words, R.color.category_phrases);
         wordListView.setAdapter(wordAdapter);
         wordListView.setOnItemClickListener(adapterViewClickListener);
         return rootView;

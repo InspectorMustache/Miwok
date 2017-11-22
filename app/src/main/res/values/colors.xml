@@ -20,6 +20,9 @@
     <!-- Primary dark color of the app (shown in the status bar) -->
     <color name="primary_dark_color">#2F1D1A</color>
 
+    <!-- Deselect color, a lighter shade of the primary -->
+    <color name="deselect_color">#A8A19E</color>
+
     <!-- Background color for app -->
     <color name="tan_background">#FFF7DA</color>
 

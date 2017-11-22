@@ -39,6 +39,7 @@ public class NumbersFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_dictionary, container, false);
 
+
        final ArrayList<Word> words = new ArrayList<Word>();
         words.add(new Word("one", "lutti", R.drawable.number_one, R.raw.number_one));
         words.add(new Word("two", "otiiko", R.drawable.number_two, R.raw.number_two));
@@ -96,7 +97,7 @@ public class NumbersFragment extends Fragment {
         };
 
         ListView wordListView = (ListView) rootView.findViewById(R.id.list);
-        WordAdapter wordAdapter = new WordAdapter(getActivity(), words, R.color.category_colors);
+        WordAdapter wordAdapter = new WordAdapter(getActivity(), words, R.color.category_numbers);
         wordListView.setAdapter(wordAdapter);
         wordListView.setOnItemClickListener(adapterViewClickListener);
         return rootView;

@@ -17,52 +17,36 @@ package com.example.android.miwok;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity {
+    ViewPager viewPager;
+    CategoryPagerAdapter categoryPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_main);
 
-        View colors = findViewById(R.id.colors);
-        View family = findViewById(R.id.family);
-        View numbers = findViewById(R.id.numbers);
-        View phrases = findViewById(R.id.phrases);
+        viewPager = (ViewPager) findViewById(R.id.main_pager);
+        categoryPagerAdapter = new CategoryPagerAdapter(getSupportFragmentManager());
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.main_tabs);
 
-        colors.setOnClickListener(this);
-        family.setOnClickListener(this);
-        numbers.setOnClickListener(this);
-        phrases.setOnClickListener(this);
-
+        viewPager.setAdapter(categoryPagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
-//    callback method for onClick events
     @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.colors:
-                moveToActivity(ColorsActivity.class);
-            break;
-            case R.id.family:
-                moveToActivity(FamilyActivity.class);
-            break;
-            case R.id.numbers:
-                moveToActivity(NumbersActivity.class);
-            break;
-            case R.id.phrases:
-                moveToActivity(PhrasesActivity.class);
-            break;
+    public void onBackPressed() {
+        if (viewPager.getCurrentItem() == 0) {
+            super.onBackPressed();
+        } else {
+            viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
         }
-    }
-
-    private void moveToActivity(Class activityClass) {
-        Intent moveIntent = new Intent(this, activityClass);
-        startActivity(moveIntent);
     }
 }

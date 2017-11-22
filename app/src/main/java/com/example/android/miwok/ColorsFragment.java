@@ -40,6 +40,7 @@ public class ColorsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_dictionary, container, false);
 
+
         final ArrayList<Word> words = new ArrayList<Word>();
         words.add(new Word("red", "weṭeṭṭi", R.drawable.color_red, R.raw.color_red));
         words.add(new Word("green", "chokokki", R.drawable.color_green, R.raw.color_green));
